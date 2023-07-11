@@ -1,47 +1,40 @@
-import React, { Component } from "react";
+import React, { useState, useEffect} from "react";
 
 import TodoList from "./components/TodoList";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const  App=()=> {
+  const [title, setTitle] = useState('');
+  const [todos, setTodos] = useState<any>([]);
 
-    this.state = {
-      title: "",
-      todos: [],
-    };
-
-    this._onChangeTitle = this._onChangeTitle.bind(this);
-    this._onClickAdd = this._onClickAdd.bind(this);
-    this._onEnterPressAdd = this._onEnterPressAdd.bind(this);
-    this._onCompleteTodo = this._onCompleteTodo.bind(this);
-  }
-
-  componentDidMount() {
-    const todos = localStorage.getItem("et-todos");
-
-    if (!todos) {
-      return;
+  useEffect(() => {
+    const storedTodos = localStorage.getItem('et-todos');
+    if (storedTodos) {
+      setTodos(JSON.parse(storedTodos));
     }
+  }, []);
 
-    this.setState({
-      todos: JSON.parse(todos),
-    });
+	useEffect(() => {
+  componentDidMount() {
+		localStorage.setItem("et-todos", JSON.stringify(this.state.todos));
   }
+	},[todos]);
 
-  componentDidUpdate() {
-    localStorage.setItem("et-todos", JSON.stringify(this.state.todos));
+   
+
+  
+
+ const  _onCompleteTodo = (id)=> {
+     const updatedTodos = [...todos];
+		 updatedTodos[id].complete = !updatedTodos[id].complete;
+		 setTodos(updatedTodos);
   }
-
-  _onCompleteTodo(id) {
-    const { todos } = this.state;
-
-    todos[id].complete = !todos[id].complete;
-
-    this.setState({
-      todos,
-    });
-  }
+	// addedthe delete function 
+	const _onItemDelete = (id) => {
+    setTodos((prev) => prev.filter((_, index) => index !== id));
+  };
+  const _onChangeTitle = (event) => {
+    setTitle(event.target.value);
+  };
 
   _onChangeTitle(event) {
     const target = event.target;

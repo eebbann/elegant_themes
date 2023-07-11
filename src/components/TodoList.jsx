@@ -3,17 +3,18 @@ import map from "lodash/map";
 
 import TodoItem from "./TodoItem";
 
-class TodoList extends React.Component {
-  _renderTodos() {
-    const { todos } = this.props;
+const TodoList =(props)=> {
+   const { todos } = props;
+		 
+	 const _renderTodos = ()=> {
     return map(todos, (todo, index) => {
       return <TodoItem key={index} id={index} {...todo} />;
     });
   }
 
-  render() {
-    return <ul className="list-group todo-list">{this._renderTodos()}</ul>;
-  }
+  
+    return <ul className="list-group todo-list">{_renderTodos()}</ul>;
+   
 }
 
 export default TodoList;

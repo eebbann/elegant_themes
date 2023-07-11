@@ -1,58 +1,51 @@
-import React from "react";
+import React from 'react';
 
-class TodoItem extends React.Component {
-  constructor(props) {
-    super(props);
+function TodoItem(props) {
+	const { id, title, complete, ocComplete } = props;
 
-    this._onCompleteCheck = this._onCompleteCheck.bind(this);
-  }
+	//oncompleteCheck function
+	const _onCompleteCheck = (e) => {
+		_onCompleteCheck(id);
+	};
 
-  _onCompleteCheck(event) {
-    const { id, onComplete } = this.props;
+	const _renderCheckbox = () => {
+		const attrs = {};
 
-    onComplete(id);
-  }
+		if (complete) {
+			attrs.checked = "checked";
+		}
 
-  _renderCheckbox() {
-    const { complete } = this.props;
-    const attrs = {};
+		return (
+			<div className="col-2 todo-item__checkbox">
+				<input
+					type='checkbox'
+					className='form-control'
+					onChange={_onCompleteCheck}
+					{...attrs} />
 
-    if (complete) {
-      attrs.checked = "checked";
-    }
+			</div>
 
-    return (
-      <div className="col-2 todo-item__checkbox">
-        <input
-          type="checkbox"
-          className="form-control"
-          onChange={this._onCompleteCheck}
-          {...attrs}
-        />
-      </div>
-    );
-  }
 
-  _renderTitle() {
-    const { title } = this.props;
+		);
+	};
 
-    return (
-      <div className="col-10 todo-item__title">
-        <h3>{title}</h3>
-      </div>
-    );
-  }
+	const _renderTitle = () => {
+		return (
+			<div className="col-10 todo-item__title">
+				<h3>{title}</h3>
+			</div>
+		);
+	};
 
-  render() {
-    return (
-      <li className="list-group-item todo-item">
-        <div className="row">
-          {this._renderCheckbox()}
-          {this._renderTitle()}
-        </div>
-      </li>
-    );
-  }
-}
+	return (
+		<li className="list-group-item todo-item">
+			<div className="row">
+				{_renderCheckbox()}
+				{_renderTitle()}
+			</div>
+		</li>
+	);
+};
 
 export default TodoItem;
+
