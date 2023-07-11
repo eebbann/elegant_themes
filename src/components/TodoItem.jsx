@@ -1,13 +1,16 @@
 import React from 'react';
 
 function TodoItem(props) {
-	const { id, title, complete, ocComplete } = props;
+	const { id, title, complete, onComplete, onDelete } = props;
 
 	//oncompleteCheck function
-	const _onCompleteCheck = (e) => {
-		_onCompleteCheck(id);
+	const _onCompleteCheck = (event) => {
+		_onComplete(id);
 	};
-
+ 
+	const _onItemClick=(event)=>{
+		onDelete(id);
+	}
 	const _renderCheckbox = () => {
 		const attrs = {};
 
@@ -31,7 +34,7 @@ function TodoItem(props) {
 
 	const _renderTitle = () => {
 		return (
-			<div className="col-10 todo-item__title">
+			<div className="col-10 todo-item__title" onclick={_onItemClick}>
 				<h3>{title}</h3>
 			</div>
 		);

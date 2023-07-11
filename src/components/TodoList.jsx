@@ -4,11 +4,18 @@ import map from "lodash/map";
 import TodoItem from "./TodoItem";
 
 const TodoList =(props)=> {
-   const { todos } = props;
+   const { todos, onComplete, onDelete } = props;
 		 
 	 const _renderTodos = ()=> {
-    return map(todos, (todo, index) => {
-      return <TodoItem key={index} id={index} {...todo} />;
+    return todos.map(todos, (todo, index) => {
+      return (
+			<TodoItem key={index}
+			 id={index} 
+			 {...todo}
+			 onComplete= {onComplete} 
+			 onDelete ={onDelete}
+			 />
+			 )
     });
   }
 
