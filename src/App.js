@@ -15,7 +15,7 @@ const App = () => {
 
 
 	useEffect(() => {
-		localStorage.setItem("et-todos", JSON.stringify(this.state.todos));
+		localStorage.setItem("et-todos", JSON.stringify(todos));
 	}, [todos]);
 
 
@@ -70,10 +70,10 @@ const App = () => {
 						<button
 							className="btn btn-success"
 							type="button"
-							onClick={this._onClickAdd}
+							onClick={_onClickAdd}
 						>
 							<span
-								className=""
+								className=" "
 								style={{
 									fontSize: "24px",
 									lineHeight: "16px",
@@ -94,14 +94,13 @@ const App = () => {
 				<div className="row">
 					<div className="col col-md-6 offset-md-3 mt-2">
 						<div className="todos-app card">
-							{this._renderHeader()}
+							{_renderHeader()}
 							<div className="card-body">
 								<TodoList
 									todos={todos}
-									onComplete={this._onCompleteTodo}
-									onDelete={this._onDeleteTodo}
-								/>
-								
+									onComplete={ _onCompleteTodo}
+									onDelete={_onItemDelete}
+								/> 
 							</div>
 						</div>
 					</div>

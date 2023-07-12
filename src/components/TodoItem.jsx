@@ -1,53 +1,51 @@
 import React from 'react';
 
-function TodoItem(props) {
-	const { id, title, complete, onComplete, onDelete } = props;
+const TodoItem = (props) => {
+  const { id, title, complete, onComplete, onDelete } = props;
 
-	//oncompleteCheck function
-	const _onCompleteCheck = (event) => {
-		_onComplete(id);
-	};
- 
-	const _onItemClick=(event)=>{
-		onDelete(id);
-	}
-	const _renderCheckbox = () => {
-		const attrs = {};
+  const _onCompleteCheck = (event) => {
+    onComplete(id);
+  };
 
-		if (complete) {
-			attrs.checked = "checked";
-		}
+  const _onItemClick = (event) => {
+    onDelete(id);
+  };
 
-		return (
-			<div className="col-2 todo-item__checkbox">
-				<input
-					type='checkbox'
-					className='form-control'
-					onChange={_onCompleteCheck}
-					{...attrs} />
+  const _renderCheckbox = () => {
+    const attrs = {};
 
-			</div>
+    if (complete) {
+      attrs.checked = 'checked';
+    }
 
+    return (
+      <div className="col-2 todo-item__checkbox">
+        <input
+          className="form-control"
+          onChange={_onCompleteCheck}
+          type="checkbox"
+          {...attrs}
+        />
+      </div>
+    );
+  };
 
-		);
-	};
+  const _renderTitle = () => {
+    return (
+      <div className="col-10 todo-item__title" onClick={_onItemClick}>
+        <h3>{title}</h3>
+      </div>
+    );
+  };
 
-	const _renderTitle = () => {
-		return (
-			<div className="col-10 todo-item__title" onclick={_onItemClick}>
-				<h3>{title}</h3>
-			</div>
-		);
-	};
-
-	return (
-		<li className="list-group-item todo-item">
-			<div className="row">
-				{_renderCheckbox()}
-				{_renderTitle()}
-			</div>
-		</li>
-	);
+  return (
+    <li className="list-group-item todo-item">
+      <div className="row">
+        {_renderCheckbox()}
+        {_renderTitle()}
+      </div>
+    </li>
+  );
 };
 
 export default TodoItem;
